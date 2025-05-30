@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -9,6 +10,8 @@ import { AuthModal } from "@/components/auth-modal"
 import { DentistRegistrationModal } from "@/components/dentist-registration-modal"
 import { BookingModal } from "@/components/booking-modal"
 import { MapPin, Star, User } from "lucide-react"
+
+
 
 // Fake dentist data
 const dentists = [
@@ -62,7 +65,8 @@ export default function HomePage() {
   const [searchCity, setSearchCity] = useState("All Cities")
   const [searchTreatment, setSearchTreatment] = useState("All Treatments")
   const [filteredDentists, setFilteredDentists] = useState(dentists)
-
+  const router = useRouter();
+  
   const handleSearch = () => {
     const filtered = dentists.filter((dentist) => {
       const cityMatch = searchCity === "All Cities" || dentist.city.toLowerCase().includes(searchCity.toLowerCase())
@@ -248,7 +252,7 @@ export default function HomePage() {
                     variant="outline"
                     size="sm"
                     className="flex-1"
-                    onClick={() => window.open(`/dentist/${dentist.id}`, "_blank")}
+                    onClick={() => router.push(`/dentist/${dentist.id}`)}
                   >
                     View Profile
                   </Button>
