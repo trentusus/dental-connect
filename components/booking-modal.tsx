@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Badge } from "@/components/ui/badge"
 import { CalendarIcon, Clock, CheckCircle } from "lucide-react"
+import { useStatsigClient } from "@statsig/react-bindings";
 
 interface BookingModalProps {
   isOpen: boolean
@@ -40,6 +41,8 @@ export function BookingModal({ isOpen, onClose, dentist }: BookingModalProps) {
   const [selectedTime, setSelectedTime] = useState<string>("")
   const [isBooked, setIsBooked] = useState(false)
 
+  const client = useStatsigClient();
+
   const handleBooking = () => {
     if (selectedDate && selectedTime) {
       setIsBooked(true)
@@ -49,6 +52,14 @@ export function BookingModal({ isOpen, onClose, dentist }: BookingModalProps) {
         setSelectedDate(new Date())
         setSelectedTime("")
       }, 2000)
+            // Log event appointment booked with random id
+      const randomId = Math.floor(Math.random() * 1000)
+      client.logEvent("appointment_booked", randomId, {
+        selected_date: selectedDate?.toLocaleDateString(),
+        selected_time: selectedTime,
+        dentist_name: dentist?.name || "name_missing",
+        dentist_city: dentist?.city || "city_missing",
+      });
     }
   }
 
