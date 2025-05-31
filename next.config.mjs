@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverExternalPackages: ['@statsig/statsig-node-core'],
   eslint: {
     ignoreDuringBuilds: true,
   },

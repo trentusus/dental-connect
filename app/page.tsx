@@ -11,46 +11,8 @@ import { DentistRegistrationModal } from "@/components/dentist-registration-moda
 import { BookingModal } from "@/components/booking-modal"
 import { MapPin, Star, User } from "lucide-react"
 import { useGateValue, useExperiment } from "@statsig/react-bindings";
+import { dentists } from "@/data/dentists"
 
-
-// Fake dentist data
-const dentists = [
-  {
-    id: 1,
-    name: "Dr. Sarah Lee",
-    city: "London",
-    bio: "Expert in cosmetic and pediatric dentistry.",
-    treatments: ["Teeth Whitening", "Braces", "Pediatric Dentistry"],
-  },
-  {
-    id: 2,
-    name: "Dr. James Patel",
-    city: "Manchester",
-    bio: "General practitioner with 15 years of experience.",
-    treatments: ["Check-up", "Fillings", "Root Canal"],
-  },
-  {
-    id: 3,
-    name: "Dr. Maria Gomez",
-    city: "Bristol",
-    bio: "Specializes in implants and oral surgery.",
-    treatments: ["Implants", "Oral Surgery", "Check-up"],
-  },
-  {
-    id: 4,
-    name: "Dr. Michael Chen",
-    city: "London",
-    bio: "Orthodontist specializing in modern alignment solutions.",
-    treatments: ["Braces", "Invisalign", "Retainers"],
-  },
-  {
-    id: 5,
-    name: "Dr. Emma Wilson",
-    city: "Birmingham",
-    bio: "Preventive dentistry and family dental care specialist.",
-    treatments: ["Check-up", "Cleaning", "Pediatric Dentistry"],
-  },
-]
 
 const allTreatments = Array.from(new Set(dentists.flatMap((d) => d.treatments)))
 const allCities = Array.from(new Set(dentists.map((d) => d.city)))
@@ -69,7 +31,6 @@ export default function HomePage() {
 
   const ratingGate = useGateValue("public_rating");
   const titleTextExperiment = useExperiment("title_text"); 
-  console.log(titleTextExperiment.get("home_heading"));
   
   const handleSearch = () => {
     const filtered = dentists.filter((dentist) => {
@@ -230,7 +191,7 @@ export default function HomePage() {
                   {ratingGate && (
                     <div className="flex items-center text-yellow-500">
                       <Star className="h-4 w-4 fill-current" />
-                      <span className="text-sm text-gray-600 ml-1">4.8</span>
+                      <span className="text-sm text-gray-600 ml-1">{dentist.rating}</span>
                     </div>
                   )}
                 </div>

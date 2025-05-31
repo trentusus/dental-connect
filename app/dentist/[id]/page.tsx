@@ -8,65 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { AuthModal } from "@/components/auth-modal"
 import { BookingModal } from "@/components/booking-modal"
 import { ArrowLeft, MapPin, Star, Calendar, Phone, Mail } from "lucide-react"
-
-// Same dentist data as homepage
-const dentists = [
-  {
-    id: 1,
-    name: "Dr. Sarah Lee",
-    city: "London",
-    bio: "Expert in cosmetic and pediatric dentistry with over 12 years of experience. Dr. Lee is passionate about creating beautiful smiles while ensuring patient comfort. She specializes in advanced cosmetic procedures and has a gentle approach that makes her especially popular with children and anxious patients.",
-    treatments: ["Teeth Whitening", "Braces", "Pediatric Dentistry"],
-    phone: "+44 20 7123 4567",
-    email: "sarah.lee@dentalconnect.com",
-    experience: "12 years",
-    education: "King's College London Dental Institute",
-  },
-  {
-    id: 2,
-    name: "Dr. James Patel",
-    city: "Manchester",
-    bio: "General practitioner with 15 years of experience in comprehensive dental care. Dr. Patel believes in preventive dentistry and takes time to educate patients about oral health. His calm demeanor and thorough approach have earned him a loyal patient base throughout Manchester.",
-    treatments: ["Check-up", "Fillings", "Root Canal"],
-    phone: "+44 161 234 5678",
-    email: "james.patel@dentalconnect.com",
-    experience: "15 years",
-    education: "University of Manchester School of Dentistry",
-  },
-  {
-    id: 3,
-    name: "Dr. Maria Gomez",
-    city: "Bristol",
-    bio: "Specializes in implants and oral surgery with advanced training in complex dental procedures. Dr. Gomez combines cutting-edge technology with compassionate care to deliver exceptional results. She is known for her precision in surgical procedures and commitment to patient comfort.",
-    treatments: ["Implants", "Oral Surgery", "Check-up"],
-    phone: "+44 117 345 6789",
-    email: "maria.gomez@dentalconnect.com",
-    experience: "10 years",
-    education: "University of Bristol Dental School",
-  },
-  {
-    id: 4,
-    name: "Dr. Michael Chen",
-    city: "London",
-    bio: "Orthodontist specializing in modern alignment solutions including traditional braces and clear aligners. Dr. Chen stays at the forefront of orthodontic technology to provide the most effective and comfortable treatment options for patients of all ages.",
-    treatments: ["Braces", "Invisalign", "Retainers"],
-    phone: "+44 20 8765 4321",
-    email: "michael.chen@dentalconnect.com",
-    experience: "8 years",
-    education: "Queen Mary University of London",
-  },
-  {
-    id: 5,
-    name: "Dr. Emma Wilson",
-    city: "Birmingham",
-    bio: "Preventive dentistry and family dental care specialist focused on maintaining optimal oral health for patients of all ages. Dr. Wilson creates a welcoming environment for families and emphasizes the importance of regular dental care and education.",
-    treatments: ["Check-up", "Cleaning", "Pediatric Dentistry"],
-    phone: "+44 121 456 7890",
-    email: "emma.wilson@dentalconnect.com",
-    experience: "14 years",
-    education: "University of Birmingham School of Dentistry",
-  },
-]
+import { dentists } from "@/data/dentists"
 
 export default function DentistProfile() {
   const params = useParams()
