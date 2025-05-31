@@ -10,7 +10,7 @@ import { AuthModal } from "@/components/auth-modal"
 import { DentistRegistrationModal } from "@/components/dentist-registration-modal"
 import { BookingModal } from "@/components/booking-modal"
 import { MapPin, Star, User } from "lucide-react"
-
+import { useGateValue } from "@statsig/react-bindings";
 
 
 // Fake dentist data
@@ -66,6 +66,9 @@ export default function HomePage() {
   const [searchTreatment, setSearchTreatment] = useState("All Treatments")
   const [filteredDentists, setFilteredDentists] = useState(dentists)
   const router = useRouter();
+
+  const gate = useGateValue("public_rating");
+
   
   const handleSearch = () => {
     const filtered = dentists.filter((dentist) => {
@@ -223,10 +226,12 @@ export default function HomePage() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg">{dentist.name}</CardTitle>
-                  <div className="flex items-center text-yellow-500">
-                    <Star className="h-4 w-4 fill-current" />
-                    <span className="text-sm text-gray-600 ml-1">4.8</span>
-                  </div>
+                  {gate && (
+                    <div className="flex items-center text-yellow-500">
+                      <Star className="h-4 w-4 fill-current" />
+                      <span className="text-sm text-gray-600 ml-1">4.8</span>
+                    </div>
+                  )}
                 </div>
                 <div className="flex items-center text-gray-600">
                   <MapPin className="h-4 w-4 mr-1" />

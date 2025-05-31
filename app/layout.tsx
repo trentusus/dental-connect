@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import MyStatsig from "./statsig";
 
 export const metadata: Metadata = {
   title: 'v0 App',
@@ -14,7 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <MyStatsig>
+          {children}
+        </MyStatsig>
+      </body>
     </html>
   )
 }
