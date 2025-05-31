@@ -10,7 +10,7 @@ import { AuthModal } from "@/components/auth-modal"
 import { DentistRegistrationModal } from "@/components/dentist-registration-modal"
 import { BookingModal } from "@/components/booking-modal"
 import { MapPin, Star, User } from "lucide-react"
-import { useGateValue } from "@statsig/react-bindings";
+import { useGateValue, useExperiment } from "@statsig/react-bindings";
 
 
 // Fake dentist data
@@ -67,8 +67,9 @@ export default function HomePage() {
   const [filteredDentists, setFilteredDentists] = useState(dentists)
   const router = useRouter();
 
-  const gate = useGateValue("public_rating");
-
+  const ratingGate = useGateValue("public_rating");
+  const titleTextExperiment = useExperiment("title_text"); 
+  console.log(titleTextExperiment.get("home_heading"));
   
   const handleSearch = () => {
     const filtered = dentists.filter((dentist) => {
@@ -163,10 +164,10 @@ export default function HomePage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Find Your Perfect Dentist</h2>
+          {/* Title */}
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{titleTextExperiment.get('home_heading', 'Title')}</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Connect with qualified dental professionals in your area. Book appointments easily and get the care you
-            deserve.
+            {titleTextExperiment.get('home_subheading', 'subheading')}
           </p>
         </div>
 
@@ -226,7 +227,7 @@ export default function HomePage() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg">{dentist.name}</CardTitle>
-                  {gate && (
+                  {ratingGate && (
                     <div className="flex items-center text-yellow-500">
                       <Star className="h-4 w-4 fill-current" />
                       <span className="text-sm text-gray-600 ml-1">4.8</span>

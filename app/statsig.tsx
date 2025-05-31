@@ -13,7 +13,7 @@ export default function MyStatsig({ children }: { children: React.ReactNode }) {
   return (
     <StatsigProvider 
       sdkKey={process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!}
-      user={{ userID: "a-user" }}
+      user={{ userID: "test_control" }}
       options={{
         logLevel: LogLevel.Debug,
         plugins: [ new StatsigAutoCapturePlugin() ],
