@@ -12,7 +12,7 @@ import { BookingModal } from "@/components/booking-modal"
 import { MapPin, Star, User } from "lucide-react"
 import { useGateValue, useExperiment } from "@statsig/react-bindings";
 import { dentists } from "@/data/dentists"
-
+import { useEffect } from "react";
 
 const allTreatments = Array.from(new Set(dentists.flatMap((d) => d.treatments)))
 const allCities = Array.from(new Set(dentists.map((d) => d.city)))
@@ -31,6 +31,16 @@ export default function HomePage() {
 
   const ratingGate = useGateValue("public_rating");
   const titleTextExperiment = useExperiment("title_text"); 
+  
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/statsig-sidecar/dist/index.min.js?apikey=client-7AFdqJrxTufbn0JjoKQBnTFucDSlQpp1ArKCsDbvnhh";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   
   const handleSearch = () => {
     const filtered = dentists.filter((dentist) => {
@@ -78,6 +88,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
+
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
