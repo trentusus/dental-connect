@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Badge } from "@/components/ui/badge"
 import { CalendarIcon, Clock, CheckCircle } from "lucide-react"
-import { useStatsigClient } from "@statsig/react-bindings";
+import { useStatsigClient, useDynamicConfig } from "@statsig/react-bindings";
+
 
 interface BookingModalProps {
   isOpen: boolean
@@ -20,7 +21,7 @@ interface BookingModalProps {
   } | null
 }
 
-const timeSlots = [
+const defaultTimeSlots: string[] = [
   "09:00",
   "09:30",
   "10:00",
@@ -42,6 +43,12 @@ export function BookingModal({ isOpen, onClose, dentist }: BookingModalProps) {
   const [isBooked, setIsBooked] = useState(false)
 
   const client = useStatsigClient();
+  // First, get the config object
+  const config = useDynamicConfig('booking_slots');
+
+  // Then, extract the value with a fallback
+  const timeSlots: string[] = config.get('booking_slots', defaultTimeSlots) as string[];;
+
 
   const handleBooking = () => {
     if (selectedDate && selectedTime) {

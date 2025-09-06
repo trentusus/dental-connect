@@ -27,10 +27,10 @@ export default function HomePage() {
   const [searchCity, setSearchCity] = useState("All Cities")
   const [searchTreatment, setSearchTreatment] = useState("All Treatments")
   const [filteredDentists, setFilteredDentists] = useState(dentists)
-  const router = useRouter();
-
+  const router = useRouter();``
   const ratingGate = useGateValue("public_rating");
   const titleTextExperiment = useExperiment("title_text"); 
+  const dentistsTextExperiment = useExperiment("dentists_text");
   
   useEffect(() => {
     const script = document.createElement("script");
@@ -146,7 +146,7 @@ export default function HomePage() {
         {/* Search Section */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>Search for Dentists</CardTitle>
+            <CardTitle>{dentistsTextExperiment.get("search_dentists_text", "Here are our dentists")}</CardTitle>
             <CardDescription>Find dentists by location and treatment type</CardDescription>
           </CardHeader>
           <CardContent>

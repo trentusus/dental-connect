@@ -4,8 +4,8 @@ import MyStatsig from "./statsig";
 import { generateBootstrapValues } from "./statsig-backend";
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'DentalConnect',
+  description: 'Demo Statsig with a two-sided marketplace',
   generator: 'v0.dev',
 }
 

@@ -5,7 +5,6 @@ import React from "react";
 import {
   LogLevel,
   StatsigProvider,
-  StatsigUser,
   StatsigOptions,
   LogEventCompressionMode,
   useClientBootstrapInit, // <- Add this
@@ -22,9 +21,16 @@ export default function MyStatsig({
 }) {
   // Update to using useClientBootstrapInit instead of auto initializing in the provider
   const sdkKey = process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!;
-  const initialUser = { userID: "test_override" };
+  const initialUser = { 
+    userID: "test_override",
+    custom: {
+       user_type: 'patient',
+       early_access: true
+     }
+  };
   const bootstrapValues = values;
   const options: StatsigOptions = {
+    environment: { tier: 'production' }, // development staging production
     logEventCompressionMode: LogEventCompressionMode.Disabled,
     logLevel: LogLevel.Debug,
     plugins: [
@@ -34,7 +40,6 @@ export default function MyStatsig({
   };
 
   const client = useClientBootstrapInit(sdkKey, initialUser, bootstrapValues, options);
-
 
   return <StatsigProvider client={client}>{children}</StatsigProvider>;
 }
