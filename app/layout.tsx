@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import MyStatsig from "./statsig";
-import { generateBootstrapValues } from "./statsig-backend";
+import { StatsigProvider } from '@/components/StatsigProvider';
 
 export const metadata: Metadata = {
   title: 'DentalConnect',
@@ -9,19 +8,17 @@ export const metadata: Metadata = {
   generator: 'v0.dev',
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const bootstrapValues = await generateBootstrapValues();
-
   return (
     <html lang="en">
       <body>
-        <MyStatsig values={bootstrapValues}>
+        <StatsigProvider>
           {children}
-        </MyStatsig>
+        </StatsigProvider>
       </body>
     </html>
   )
