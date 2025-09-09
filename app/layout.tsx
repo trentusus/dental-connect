@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { StatsigProvider } from '@/components/StatsigProvider';
+import StatsigProvider from '@/components/StatsigProvider';
+import StatsigPlugins from '@/components/StatsigPlugins';
 
 export const metadata: Metadata = {
   title: 'DentalConnect',
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <StatsigProvider>
+          <StatsigPlugins />
           {children}
         </StatsigProvider>
       </body>

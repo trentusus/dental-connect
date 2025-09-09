@@ -40,7 +40,7 @@
     "@statsig/next": "^3.25.1",
     "@statsig/react-bindings": "^3.25.1",
     "@statsig/session-replay": "^3.25.1",
-    "@statsig/statsig-node-core": "^0.4.3",
+    "@statsig/statsig-node-core": "^0.8.6",
     "@statsig/web-analytics": "^3.25.1",
     "autoprefixer": "^10.4.21",
     "class-variance-authority": "^0.7.1",
