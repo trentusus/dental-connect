@@ -89,6 +89,9 @@ dependencies:
   '@radix-ui/react-tooltip':
     specifier: 1.1.6
     version: 1.1.6(@types/react-dom@19.1.9)(@types/react@19.1.12)(react-dom@19.1.1)(react@19.1.1)
+  '@statsig/client-core':
+    specifier: ^3.25.1
+    version: 3.25.1
   '@statsig/next':
     specifier: ^3.25.1
     version: 3.25.1(next@15.2.4)(react@19.1.1)

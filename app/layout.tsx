@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import StatsigProvider from '@/components/StatsigProvider';
 import StatsigPlugins from '@/components/StatsigPlugins';
+import ConsentBar from '@/components/ConsentBar';
 
 export const metadata: Metadata = {
   title: 'DentalConnect',
@@ -20,6 +21,7 @@ export default function RootLayout({
         <StatsigProvider>
           <StatsigPlugins />
           {children}
+          <ConsentBar />
         </StatsigProvider>
       </body>
     </html>

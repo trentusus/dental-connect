@@ -31,7 +31,9 @@ export default function HomePage() {
   const ratingGate = useGateValue("public_rating");
   const titleTextExperiment = useExperiment("title_text"); 
   const dentistsTextExperiment = useExperiment("dentists_text");
-  
+
+  /*
+  // Sidecar Script (Not connected to Consent)
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.jsdelivr.net/npm/statsig-sidecar/dist/index.min.js?apikey=client-7AFdqJrxTufbn0JjoKQBnTFucDSlQpp1ArKCsDbvnhh";
@@ -41,6 +43,7 @@ export default function HomePage() {
       document.body.removeChild(script);
     };
   }, []);
+  */
   
   const handleSearch = () => {
     const filtered = dentists.filter((dentist) => {
