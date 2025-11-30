@@ -1,9 +1,9 @@
 import { StatsigBootstrapProvider } from '@statsig/next';
-import { LogEventCompressionMode, LogLevel } from '@statsig/client-core';
+import { LogEventCompressionMode, LogLevel, StableID } from '@statsig/client-core';
 
 export default async function StatsigProvider({ children }: { children: React.ReactNode }) {
   const initialUser = {
-    userID: "test_override",
+    userID: "control_override",
     custom: {
       user_type: 'patient',
       early_access: true
@@ -22,10 +22,13 @@ export default async function StatsigProvider({ children }: { children: React.Re
         logEventCompressionMode: LogEventCompressionMode.Disabled,
         logLevel: LogLevel.Debug,
         loggingEnabled: decision==='accepted' ? 'browser-only' : 'disabled', 
-        disableStorage: false
-        
+        disableStorage: false,
+        environment: { tier: 'production' }
         }
       }
+      serverOptions={{
+
+      }}
     >
       {children}
     </StatsigBootstrapProvider>

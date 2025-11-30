@@ -1,4 +1,4 @@
-export const dentists = [
+export const dentistsList = [
   {
     id: 1,
     name: "Dr. Sarah Lee",

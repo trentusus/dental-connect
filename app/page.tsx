@@ -10,14 +10,17 @@ import { AuthModal } from "@/components/auth-modal"
 import { DentistRegistrationModal } from "@/components/dentist-registration-modal"
 import { BookingModal } from "@/components/booking-modal"
 import { MapPin, Star, User } from "lucide-react"
-import { useGateValue, useExperiment } from "@statsig/react-bindings";
-import { dentists } from "@/data/dentists"
+import { useGateValue, useExperiment, useStatsigClient, useDynamicConfig } from "@statsig/react-bindings";
+import { dentistsList } from "@/data/dentists"
 import { useEffect } from "react";
 
-const allTreatments = Array.from(new Set(dentists.flatMap((d) => d.treatments)))
-const allCities = Array.from(new Set(dentists.map((d) => d.city)))
+
 
 export default function HomePage() {
+  const dentists = useDynamicConfig("dentists_list").get("dentists_list") || dentistsList;
+  const ratingGate = useGateValue("public_rating");
+  const titleTextExperiment = useExperiment("title_text"); 
+  const dentistsTextExperiment = useExperiment("dentists_text");
   const [user, setUser] = useState<{ email: string; type: "patient" | "dentist" } | null>(null)
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [showDentistRegistration, setShowDentistRegistration] = useState(false)
@@ -27,11 +30,11 @@ export default function HomePage() {
   const [searchCity, setSearchCity] = useState("All Cities")
   const [searchTreatment, setSearchTreatment] = useState("All Treatments")
   const [filteredDentists, setFilteredDentists] = useState(dentists)
-  const router = useRouter();``
-  const ratingGate = useGateValue("public_rating");
-  const titleTextExperiment = useExperiment("title_text"); 
-  const dentistsTextExperiment = useExperiment("dentists_text");
+  const router = useRouter();
+  const allTreatments = Array.from(new Set(dentists.flatMap((d) => d.treatments)))
+  const allCities = Array.from(new Set(dentists.map((d) => d.city)))
 
+  
   /*
   // Sidecar Script (Not connected to Consent)
   useEffect(() => {
